@@ -12,8 +12,8 @@ from flask_cors import CORS
 
 load_dotenv()
 
-OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-OPENROUTER_MODEL = "meta-llama/llama-3.3-70b-instruct:free"
+
+
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 # Load Bhagavad Gita chunks once at startup
@@ -63,13 +63,7 @@ def inference_embeddings(text):
    
     return embedding_vector
 
-# def inference_embeddings(text):
-#     # Call Gemini embedding
-#     result = client.models.embed_content(model="gemini-embedding-001", contents=text)
-#     # Convert to floats
-#     embedding_list = [float(x) for x in result.embeddings[0].values]
-#     # Wrap in list to make it 2D
-#     return [embedding_list] 
+
     
     
 
