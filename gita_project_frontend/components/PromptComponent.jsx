@@ -63,7 +63,7 @@ const FullHeightChat = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/get_gita_wisdom",
+        "https://full-gita-project-1.onrender.com/get_gita_wisdom",
         { text: prompt }
       );
 
