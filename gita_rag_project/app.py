@@ -17,8 +17,11 @@ load_dotenv()
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 # Load Bhagavad Gita chunks once at startup
-with open("bhagavad_gita_new.json", "r", encoding="utf-8") as f:
-    gita_chunks = json.load(f)
+def load_gita():
+    with open("bhagavad_gita_new.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
+gita_chunks = load_gita()
    
 
 app = Flask(__name__)
@@ -181,4 +184,4 @@ def live():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

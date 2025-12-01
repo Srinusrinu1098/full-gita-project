@@ -1,8 +1,9 @@
 Flask
+flask-cors
 requests
 pandas
 scikit-learn
 numpy
 python-dotenv
-flask-cors
 google-genai
+gunicorn
