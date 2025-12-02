@@ -18,7 +18,7 @@ client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 # Load Bhagavad Gita chunks once at startup
 def load_gita():
-    with open("gita_rag_project/bhagavad_gita_new.json", "r", encoding="utf-8") as f:
+    with open("bhagavad_gita_new.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
 gita_chunks = load_gita()
