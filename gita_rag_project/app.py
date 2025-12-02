@@ -18,7 +18,7 @@ client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 # Load Bhagavad Gita chunks once at startup
 def load_gita():
-    with open("bhagavad_gita_new.json", "r", encoding="utf-8") as f:
+    with open("gita_rag_project/bhagavad_gita_new.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
 gita_chunks = load_gita()
@@ -74,6 +74,7 @@ def inference_embeddings(text):
   
 
 def get_emotions_from_text(user_text):
+    
     prompt = f"""
 Take the text below and classify it into 1–3 emotions from this list:
 ["sadness", "fear", "peace", "happiness", "motivation", "anger", "wisdom"].
@@ -108,6 +109,7 @@ Return JSON strictly in this format:
     
 
     try:
+        
         return json.loads(response_text)
     except:
         return {"tags": ["wisdom"]}  # fallback
@@ -120,15 +122,18 @@ def get_gita_wisdom():
         data = request.json
         
         user_text = data.get("text", "")
+        print(user_text)
 
         if not user_text:
             return jsonify({"error": "Missing 'text' in request body"}), 400
 
         # Step 1: Get emotion tags
         user_tags = get_emotions_from_text(user_text)
+        print(user_tags)
         
         # Step 2: Get embeddings
         user_embed = inference_embeddings(user_text)
+        print(user_embed)
     
         # Step 3: Filter matching chunks
         matching_chunks = [
@@ -139,6 +144,7 @@ def get_gita_wisdom():
             return jsonify({"error": "No matching shlokas found"}), 404
 
         df = pd.DataFrame.from_records(matching_chunks)
+        print(df)
 
         # Step 4: Cosine similarity
         similarities = cosine_similarity(np.vstack(df["embeddings"]), [user_embed]).flatten()
@@ -184,4 +190,4 @@ def live():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
