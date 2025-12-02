@@ -131,7 +131,7 @@ const FullHeightChat = () => {
                   <div className="animate-spin text-gray-500 text-xl">⏳</div>
                   <h1 className="text-gray-700 text-sm">
                     {" "}
-                    Please wait 10-15 seconds for the voice...
+                    Please wait 10-15 seconds for the voice, after getting response 😌
                   </h1>
                 </div>
               ) : (
